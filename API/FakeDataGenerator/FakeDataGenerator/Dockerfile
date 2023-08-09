@@ -18,4 +18,5 @@ RUN dotnet publish "FakeDataGenerator.csproj" -c Release -o /app/publish /p:UseA
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY ["Resources", "Resources"]
 ENTRYPOINT ["dotnet", "FakeDataGenerator.dll"]

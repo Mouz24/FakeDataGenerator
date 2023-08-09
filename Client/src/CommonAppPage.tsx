@@ -21,7 +21,7 @@ const CommonAppPage: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://api.mouz.peabody28.com/api/users', {
+      const response = await axios.get('http://peabody28.com:1025/api/users', {
         params: {
           region,
           mistakesRate,
@@ -64,7 +64,7 @@ const CommonAppPage: React.FC = () => {
 
   const handleExportCSV = async () => {
     try {
-      const response = await axios.post('http://api.mouz.peabody28.com/api/users/get-csv', usersData);
+      const response = await axios.post('http://peabody28.com:1025/api/users/get-csv', usersData);
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
