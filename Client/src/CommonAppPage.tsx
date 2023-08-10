@@ -39,22 +39,26 @@ const CommonAppPage: React.FC = () => {
 
   const handleRegionChange = (selectedRegionIndex: number) => {
     setRegion(selectedRegionIndex);
+    setUsersData([]);
     setPageNumber(1);
   };
 
   const handleErrorsChange = (value: number) => {
     setMistakesRate(value);
+    setUsersData([]);
     setPageNumber(1);
   };
 
   const handleSeedChange = (value: number) => {
     setSeed(value);
+    setUsersData([]);
     setPageNumber(1);
   };
 
   const handleRandomSeed = () => {
     const randomSeed = Math.floor(Math.random() * 10000);
     setSeed(randomSeed);
+    setUsersData([]);
     setPageNumber(1);
   };
 
@@ -78,6 +82,18 @@ const CommonAppPage: React.FC = () => {
 
   useEffect(() => {
     fetchData();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (mistakesRate === 0 && event.key === 'Backspace') {
+        event.preventDefault();
+      }
+    };
+
+    fetchData();
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [pageNumber, region, mistakesRate, seed]);
 
   return (
